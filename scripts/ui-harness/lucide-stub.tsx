@@ -1,0 +1,3 @@
+import React from 'react'
+const make = (name: string) => ({ size = 24, className = '', ...rest }: any) => <svg data-icon={name} width={size} height={size} viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="4" width="16" height="16" rx="3" /></svg>
+export const AlertTriangle = make('AlertTriangle'), FolderOpen = make('FolderOpen'), LoaderCircle = make('LoaderCircle'), Play = make('Play'), RefreshCw = make('RefreshCw'), UserRound = make('UserRound'), WifiOff = make('WifiOff'), HardDrive = make('HardDrive'), Search = make('Search'), Trash2 = make('Trash2'), Layers3 = make('Layers3')
