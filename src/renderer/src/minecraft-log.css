@@ -1,0 +1,53 @@
+.minecraft-log-page { max-width: 1500px; height: 100%; min-height: 580px; display: flex; flex-direction: column; padding-bottom: 24px; }
+.minecraft-log-page > .page-heading { flex: none; }
+.minecraft-log-upload-action { flex: none; background: var(--action-green); border-color: var(--action-green-border); color: #fff; }
+.minecraft-log-upload-action:hover:enabled { background: var(--action-green-hover); border-color: var(--action-green-hover-border); }
+.minecraft-log-panel { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 18px; border: 1px solid #2d372c; border-radius: 8px; background: #161c16; }
+.minecraft-log-toolbar, .minecraft-log-options, .minecraft-log-actions, .minecraft-log-footer { display: flex; align-items: center; gap: 12px; }
+.minecraft-log-toolbar { justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #2d372c; }
+.minecraft-log-toolbar, .minecraft-log-footer { flex: none; }
+.minecraft-log-options { flex-wrap: wrap; gap: 18px; }
+.minecraft-log-check { display: flex; align-items: center; gap: 8px; padding: 0; border: 0; background: transparent; color: #d2dcce; font: 500 13px 'Inter Variable', 'Segoe UI', sans-serif; }
+.minecraft-log-actions { flex-wrap: wrap; gap: 8px; }
+.minecraft-log-actions button, .minecraft-log-search button, .minecraft-log-error button { display: flex; align-items: center; justify-content: center; gap: 8px; height: 38px; padding: 0 12px; border: 1px solid #2d372c; border-radius: 6px; background: #202720; color: #d2dcce; font: 600 13px 'Inter Variable', 'Segoe UI', sans-serif; white-space: nowrap; }
+.minecraft-log-actions button:hover:not(:disabled), .minecraft-log-search button:hover:not(:disabled), .minecraft-log-error button:hover { border-color: #465244; background: #2d372c; }
+.minecraft-log-page button:focus-visible, .minecraft-log-page input:focus-visible, .minecraft-console:focus-visible { outline: 1px solid #8397a7; outline-offset: 3px; }
+.minecraft-log-context { display: flex; align-items: center; min-width: 200px; }
+.minecraft-log-session { width: 270px; max-width: 100%; }
+.minecraft-log-session-info { display: flex; align-items: center; height: 50px; padding: 6px 12px; border: 1px solid #2d372c; border-radius: 6px; background: #0f130f; }
+.minecraft-log-session .dropdown-trigger { min-height: 42px; }
+.minecraft-log-session .dropdown-copy strong { font-size: 12px; }
+.minecraft-log-session .dropdown-copy small { font-size: 11px; }
+.minecraft-console { flex: 1; min-height: 180px; min-width: 0; overflow: auto; padding: 12px 0; border: 1px solid #2d372c; border-radius: 6px; background: #0f130f; color: #d2dcce; font: 13px/22px Consolas, 'Cascadia Mono', monospace; user-select: text; scrollbar-width: thin; scrollbar-color: #465244 transparent; }
+.minecraft-console-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100%; padding: 32px; color: #96a493; text-align: center; font: 14px/1.6 'Inter Variable', 'Segoe UI', sans-serif; }
+.minecraft-console-empty > svg { margin-bottom: 14px; color: #7b8878; }
+.minecraft-console-empty h3 { margin: 0 0 6px; color: #d2dcce; font-size: 17px; font-weight: 600; }
+.minecraft-console-empty p { max-width: 440px; margin: 0; }
+.minecraft-log-chunk { content-visibility: auto; contain-intrinsic-size: auto 4400px; }
+.minecraft-console:not(.wrap) .minecraft-log-chunk { content-visibility: visible; width: max-content; min-width: 100%; }
+.minecraft-console-line { display: grid; grid-template-columns: 5ch minmax(0, 1fr); column-gap: 14px; min-height: 22px; padding: 0 14px; }
+.minecraft-console:not(.wrap) .minecraft-console-line { grid-template-columns: 5ch max-content; width: max-content; min-width: 100%; }
+.minecraft-line-number { color: #7b8878; text-align: right; user-select: none; }
+.minecraft-line-text { white-space: pre; }
+.minecraft-console.wrap .minecraft-line-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.minecraft-console.colored .level-error .minecraft-line-text { color: #f08080; }
+.minecraft-console.colored .level-warn .minecraft-line-text { color: #e3a05b; }
+.minecraft-console.colored .level-debug .minecraft-line-text { color: #8397a7; }
+.minecraft-console-line.found { background: #27323e; }
+.minecraft-console mark { padding: 0; border-radius: 2px; background: #594c25; color: #f0d482; }
+.minecraft-log-footer { justify-content: space-between; margin-top: 16px; gap: 16px 24px; flex-wrap: wrap; }
+.minecraft-log-footer .minecraft-log-actions { margin-left: auto; }
+.minecraft-log-search { display: flex; align-items: center; flex: 1; min-width: 240px; max-width: 400px; margin-left: auto; gap: 9px; }
+.minecraft-log-search-field { display: flex; align-items: center; flex: 1; min-width: 0; height: 38px; padding-left: 11px; border: 1px solid #2d372c; border-radius: 6px; background: #0f130f; }
+.minecraft-log-search-field > svg { flex: none; color: #96a493; }
+.minecraft-log-search-field:focus-within { border-color: #8397a7; }
+.minecraft-log-search input { flex: 1; min-width: 0; height: 100%; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; color: #d2dcce; font: 13px 'Inter Variable', 'Segoe UI', sans-serif; }
+.minecraft-log-limit { margin: 12px 0 0; color: #96a493; font-size: 12px; }
+.minecraft-log-error { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; color: #f08080; font-size: 13px; }
+.minecraft-log-search input:focus-visible { outline: none; }
+
+.minecraft-console.colored .level-launcher .minecraft-line-text { color: #de8be7; }
+.minecraft-log-confirm .account-dialog-symbol { background: #202720; border-color: #2d372c; color: #96a493; }
+
+.minecraft-console.empty { background: #161c16; }
+.minecraft-log-copy[data-pending=true]:disabled { cursor: pointer; }

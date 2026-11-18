@@ -1,0 +1,21 @@
+import overworldImage from '../assets/green-landscape.png'
+import netherImage from '../assets/nether-landscape.png'
+import endImage from '../assets/end-landscape.png'
+import type { LauncherSettings } from '../../shared/types'
+import { normalizeHeroSettings } from '../../shared/hero-backgrounds'
+
+export interface HeroSlide { id: string; label: string; short: string; image: string; custom?: boolean; titleA: string; titleB: string; description: string }
+export const builtinHeroSlides: HeroSlide[] = [
+  { id: 'overworld', label: '01 / THE OVERWORLD', short: 'Overworld', image: overworldImage, titleA: 'Yeni bir dünya', titleB: 'seni bekliyor.', description: 'Macerana kaldığın yerden devam et. Profilini seç ve oynamaya başla.' },
+  { id: 'nether', label: '02 / THE NETHER', short: 'Nether', image: netherImage, titleA: 'Ateşin ötesine', titleB: 'yolculuk et.', description: 'Bilinmeyene açılan kapı burada. Hazırsan macerana devam et.' },
+  { id: 'end', label: '03 / THE END', short: 'End', image: endImage, titleA: 'Sonun ötesinde', titleB: 'yeni bir başlangıç.', description: 'Her keşif başka bir hikâye. Kendi yolunu seç ve dünyana dön.' }
+]
+export function enabledHeroSlides(settings: Partial<LauncherSettings>): HeroSlide[] {
+  const normalized = normalizeHeroSettings(settings)
+  const slides = [...builtinHeroSlides.filter(slide => !normalized.disabledHeroBackgrounds?.includes(slide.id as 'overworld' | 'nether' | 'end')),
+    ...(normalized.heroBackgrounds ?? []).filter(item => item.enabled).map(item => ({ ...builtinHeroSlides[0], id: item.id, label: item.name, short: item.name, image: '', custom: true }))]
+  return normalized.heroBackgroundOrder!.flatMap(id => {
+    const slide = slides.find(item => item.id === id)
+    return slide ? [slide] : []
+  }).map((slide, index) => ({ ...slide, label: `${String(index + 1).padStart(2, '0')} / ${slide.custom ? slide.short : `THE ${slide.short.toUpperCase()}`}` }))
+}

@@ -1,0 +1,7 @@
+.system-log-picker { width: 270px; max-width: 100%; }
+.system-log-picker .dropdown-trigger { min-height: 50px; }
+.system-logs-page .minecraft-console { min-height: 230px; }
+.system-log-loading, .system-log-upload { display: flex; align-items: center; gap: 8px; padding: 0 0 12px; color: #96a493; font-size: 13px; }
+.system-log-delete-list { max-height: 200px; overflow-y: auto; margin: 0; padding: 8px 14px; list-style: none; border: 1px solid #2d372c; border-radius: 6px; background: #0f130f; color: #d2dcce; font: 13px/1.6 Consolas, monospace; scrollbar-width: thin; scrollbar-color: #465244 transparent; }
+.system-log-delete-list li { padding: 7px 0; overflow-wrap: anywhere; }
+.system-log-delete-list li + li { border-top: 1px solid #202720; }

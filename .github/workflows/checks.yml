@@ -1,0 +1,61 @@
+name: Build and checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
+        with:
+          version: 10.28.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check translations
+        run: node scripts/check-i18n.mjs
+      - name: Check accounts, launches, servers and worlds
+        shell: pwsh
+        run: |
+          $checks = @(
+            'scripts/test-accounts.cjs',
+            'scripts/test-profile-sessions.cjs',
+            'scripts/test-playtime.cjs',
+            'scripts/test-servers-custom.cjs',
+            'scripts/test-custom-client-icons.cjs',
+            'scripts/test-profile-server-sync.cjs',
+            'scripts/test-worlds.cjs',
+            'scripts/test-updater.cjs',
+            'scripts/test-portable-updater.cjs',
+            'scripts/test-release-notes.cjs',
+            'scripts/test-error-log.cjs'
+          )
+          foreach ($check in $checks) {
+            node $check
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Build application
+        run: pnpm run build
+      - name: Verify real update downloads without installation
+        shell: pwsh
+        run: |
+          $qaNetwork = Start-Process -FilePath "$PWD/node_modules/electron/dist/electron.exe" -ArgumentList 'scripts/test-updater-download.cjs' -WindowStyle Hidden -Wait -PassThru -RedirectStandardOutput "$PWD/build/qa-update-network.log" -RedirectStandardError "$PWD/build/qa-update-network-error.log"
+          Get-Content build/qa-update-network.log
+          Get-Content build/qa-update-network-error.log
+          exit $qaNetwork.ExitCode
